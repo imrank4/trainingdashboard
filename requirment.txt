@@ -5,4 +5,5 @@ streamlit==1.25.0
 plotly_express-0.4.1.dist-info
 plotly_express
 plotly
+plotly-5.19.0.dist-info
 
