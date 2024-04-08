@@ -3,6 +3,10 @@ import pandas as pd
 import plotly.express as px
 import os
 
+st.set_page_config(page_title='Training dashboard',
+                       page_icon='car',
+                        layout='wide',initial_sidebar_state='expanded')
+
 def load_data():
     try:
         fl = st.file_uploader(":file_folder: Upload mentioned file type: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
