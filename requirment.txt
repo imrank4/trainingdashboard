@@ -1,5 +1,7 @@
 openpyxl
 pandas==2.0.1
+plotly==5.19.0
+plotly-expres==0.4.1
 plotly==5.13.1
 streamlit==1.25.0
 plotly_express-0.4.1.dist-info
