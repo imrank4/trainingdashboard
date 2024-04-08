@@ -15,8 +15,8 @@ def load_data():
             st.write(filename)
             df = pd.read_csv(fl)  # Read uploaded file directly
         else:
-            os.chdir(r'C:\Users\px05724\OneDrive - Alliance\Desktop\py da')
-            df = pd.read_csv('py.csv')
+            os.chdir(r'py.csv')
+            df = pd.read_csv('trainingdashboard/py.csv')
         
         # Assuming the columns exist in the loaded DataFrame
         df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
