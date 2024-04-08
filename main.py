@@ -16,7 +16,7 @@ def load_data():
             df = pd.read_csv(fl)  # Read uploaded file directly
         else:
             os.chdir(r'trainingdashboard/py.csv')
-            df = pd.read_csv('trainingdashboard/py.csv')
+            df = pd.read_csv('https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv')
         
         # Assuming the columns exist in the loaded DataFrame
         df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
