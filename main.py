@@ -15,7 +15,7 @@ def load_data():
             st.write(filename)
             df = pd.read_csv(fl)  # Read uploaded file directly
         else:
-            os.chdir(r'py.csv')
+            os.chdir(r'trainingdashboard/py.csv')
             df = pd.read_csv('trainingdashboard/py.csv')
         
         # Assuming the columns exist in the loaded DataFrame
