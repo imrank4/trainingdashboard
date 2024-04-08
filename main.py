@@ -15,7 +15,7 @@ def load_data():
             st.write(filename)
             df = pd.read_csv(fl)  # Read uploaded file directly
         else:
-            os.chdir(r'trainingdashboard/py.csv')
+            os.chdir(r'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv')
             df = pd.read_csv('https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv')
         
         # Assuming the columns exist in the loaded DataFrame
