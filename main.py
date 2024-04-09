@@ -6,11 +6,12 @@ import os
 st.set_page_config(page_title='Training dashboard',
                        page_icon='car',
                         layout='wide',initial_sidebar_state='expanded')
-st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
+
 
 def load_data():
     try:
         fl = st.file_uploader(":file_folder: Upload mentioned file type: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
+        st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
         if fl is not None:  # If file uploaded
             filename = fl.name
             st.write("Uploaded filename:", filename)
