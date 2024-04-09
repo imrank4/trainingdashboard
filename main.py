@@ -9,14 +9,19 @@ st.set_page_config(page_title='Training dashboard',
 
 def load_data():
     try:
-        fl = st.file_uploader(":file_folder: Upload mentioned file type: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
         if fl is not None:
-            filename = fl.name
-            st.write(filename)
-            df = pd.read_csv(fl)  # Read uploaded file directly
+        filename = fl.name
+        st.write(filename)
+        df = pd.read_csv(fl)
+    else:
+        url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            content = response.content.decode('utf-8')
+            df = pd.read_csv(StringIO(content))
         else:
-            os.chdir(r'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv')
-            df = pd.read_csv('https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv')
+            st.error(f"Failed to fetch data from {url}. Error code: {response.status_code}")
         
         # Assuming the columns exist in the loaded DataFrame
         df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
