@@ -13,10 +13,12 @@ def load_data():
         if fl is not None:
             filename = fl.name
             st.write(filename)
+            
             df = pd.read_csv(fl)  # Read uploaded file directly
         else:
-            os.chdir(r'https://docs.google.com/spreadsheets/d/16chBmnd8atG_fd6hgX79BZcRPr3eQRvFcaKLOyVZZag/edit?usp=sharing')
-            df = pd.read_csv('py.csv')
+            url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
+            os.chdir(url)
+            df = pd.read_csv(url)
         
         # Assuming the columns exist in the loaded DataFrame
         df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
