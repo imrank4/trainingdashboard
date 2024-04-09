@@ -46,7 +46,7 @@ def load_data():
 
 def search_and_filter_data(df):
     st.markdown('<style>div.block-container{padding-top:2rem;}<style>', unsafe_allow_html=True)
-    st.title('Search and Filter Data :mag: ')
+    st.subheader(' Search and Filter Data :mag:')
     with st.sidebar:
         st.header("Choose Filter:")
         zone = st.text_input('Enter Region:')
