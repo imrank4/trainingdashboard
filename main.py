@@ -14,7 +14,7 @@ def load_data():
         #col1,col2 =st.columns(2)
         #with col2:
         with st.sidebar:
-            fl = st.file_uploader(":file_folder: Upload file: csv, xlsx, xls", type=(["csv", "xls", "xlsx"])
+            fl = st.file_uploader(":file_folder: Upload file: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
         st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
         if fl is not None:  # If file uploaded
             filename = fl.name
