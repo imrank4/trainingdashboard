@@ -6,6 +6,7 @@ import os
 st.set_page_config(page_title='Training dashboard',
                        page_icon='car',
                         layout='wide',initial_sidebar_state='expanded')
+st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
 
 def load_data():
     try:
