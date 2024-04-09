@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import os
-
 st.set_page_config(page_title='Training dashboard',
                        page_icon='car',
                         layout='wide',initial_sidebar_state='expanded')
@@ -10,7 +8,13 @@ st.set_page_config(page_title='Training dashboard',
 
 def load_data():
     try:
-        fl = st.file_uploader(":file_folder: Upload mentioned file type: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
+        st.header('D-SIRE TRAINING JOURNEY   : 🏆')
+
+        st.image("Dsire.jpg")
+        #col1,col2 =st.columns(2)
+        #with col2:
+        with st.sidebar:
+            fl = st.file_uploader(":file_folder: Upload file: csv, xlsx, xls", type=(["csv", "xls", "xlsx"])
         st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
         if fl is not None:  # If file uploaded
             filename = fl.name
@@ -31,7 +35,7 @@ def load_data():
         #     df = pd.read_csv(url)
         
         # Assuming the columns exist in the loaded DataFrame
-        df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
+        df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER NAME","DEALER CODE","USER ID",  "FULL NAME", "JOB TITLE", "TRAINING STATUS","ELIGLIBLITY","DSIRE STATUS", "DSIRE TARGET", "WBT", "ASSESSMENT", "JOINING DATE","R-AGING"]]
         
         # You may also use slicing method for this 
         # df = df.iloc[0:20, 2:8]
@@ -42,12 +46,14 @@ def load_data():
 
 def search_and_filter_data(df):
     st.markdown('<style>div.block-container{padding-top:1rem;}<style>', unsafe_allow_html=True)
-    st.title(':mag: Search and Filter Data ')
+    st.title('Search and Filter Data :mag: ')
     with st.sidebar:
         st.header("Choose Filter:")
-        dealer_group = st.text_input('Enter Dealer group: Name')
-        dealer_code = st.text_input('Enter Dealer code: ABCD')
-        profile = st.text_input('Enter Profile: SC or TL Etc')
+        zone = st.text_input('Enter Region:')
+        dealer_group = st.text_input('Enter Dealer Group: Name')
+        #dealer_group = st.multiselect('Enter Dealer group: Name',options=filtered_data['DEALER CODE'].unique())
+        dealer_code = st.text_input('Enter Dealer Code:')
+        
         
     filtered_data = df.copy()  # Initially, the filtered data is the same as the original data
 
@@ -64,35 +70,38 @@ def search_and_filter_data(df):
         filtered_data = filtered_data[filtered_data['DEALER GROUP'].str.contains(dealer_group, case=False)]
     
     # Filter by profile only
-    elif profile:
-        filtered_data = filtered_data[filtered_data['PROFILE'].str.contains(profile, case=False)]
+    elif zone:
+        filtered_data = filtered_data[filtered_data['DEALER ZONE'].str.contains(zone, case=False)]
 
-    st.write(filtered_data)
+    if dealer_code or dealer_group or zone:  # Display table only if any filter criteria are entered
+        st.write(filtered_data)
 
-    # DSIRE GRAPH CREATION
-    try:
-        # Create bar chart showing the count of training statuses and targets per dealer zone
-        training_count_df = filtered_data.groupby(["DEALER CODE", "DSIRE STATUS", "DSIRE TARGET"]).size().reset_index(name="COUNT")
+        # DSIRE GRAPH CREATION
+        try:
+            # Create bar chart showing the count of training statuses and targets per dealer zone
+            training_count_df = filtered_data.groupby(["DEALER CODE", "DSIRE STATUS", "DSIRE TARGET"]).size().reset_index(name="COUNT")
 
-        # Create bar chart showing the count of training statuses per dealer zone
-        fig = px.bar(training_count_df, x="DSIRE STATUS", y="COUNT", color="DSIRE TARGET",
-                     title="Training Status by Zone", barmode="group", text="COUNT", facet_row="DEALER CODE", facet_row_spacing=0.5)
+            # Create bar chart showing the count of training statuses per dealer zone
+            fig = px.bar(training_count_df, x="DSIRE STATUS", y="COUNT", color="DSIRE TARGET",
+                         title="Training Status by Zone", barmode="group", text="COUNT", facet_row="DEALER CODE", facet_row_spacing=0.5)
 
-        # Add value labels on top of the bars
-        fig.update_traces(textposition='auto')
+            # Add value labels on top of the bars
+            fig.update_traces(textposition='auto')
 
-        # Remove x-axis and y-axis labels
-        fig.update_layout(xaxis_title="", yaxis_title="")
+            # Remove x-axis and y-axis labels
+            fig.update_layout(xaxis_title="", yaxis_title="")
 
-        # Display the bar chart
-        st.subheader("Training Status by Dealer code")
-        st.plotly_chart(fig, use_container_width=True)
+            # Display the bar chart
+            st.subheader("Training Status by Dealer code")
+            st.plotly_chart(fig, use_container_width=True)
 
-    except ValueError as e:
-        if "Vertical spacing cannot be greater than" in str(e):
-            st.warning("Too many unique values for Dealer code, Please select a different dataset or column.")
-        else:
-            raise e
+        except ValueError as e:
+            if "Vertical spacing cannot be greater than" in str(e):
+                st.warning("Too many unique values for Dealer code, Please select a different dataset or column.")
+            else:
+                raise e
+    else:
+        st.write("Enter filter criteria for data visiblity.")  # Display a message to prompt user for input
 
 def main():
     df = load_data()
