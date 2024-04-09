@@ -15,7 +15,7 @@ def load_data():
         #with col2:
         with st.sidebar:
             fl = st.file_uploader(":file_folder: Upload file: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
-        st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
+        #st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
         if fl is not None:  # If file uploaded
             filename = fl.name
             st.write("Uploaded filename:", filename)
@@ -45,7 +45,7 @@ def load_data():
         return None
 
 def search_and_filter_data(df):
-    st.markdown('<style>div.block-container{padding-top:1rem;}<style>', unsafe_allow_html=True)
+    st.markdown('<style>div.block-container{padding-top:2rem;}<style>', unsafe_allow_html=True)
     st.title('Search and Filter Data :mag: ')
     with st.sidebar:
         st.header("Choose Filter:")
