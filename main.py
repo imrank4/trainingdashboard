@@ -10,15 +10,23 @@ st.set_page_config(page_title='Training dashboard',
 def load_data():
     try:
         fl = st.file_uploader(":file_folder: Upload mentioned file type: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
-        if fl is not None:
+        if fl is not None:  # If file uploaded
             filename = fl.name
-            st.write(filename)
-            
+            st.write("Uploaded filename:", filename)
             df = pd.read_csv(fl)  # Read uploaded file directly
-        else:
+        else:  # If no file uploaded, load data from a URL
             url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
-            os.chdir(url)
+            st.write("No file uploaded. Loading data from URL...")
             df = pd.read_csv(url)
+      # if fl is not None:
+        #     filename = fl.name
+        #     st.write(filename)
+            
+        #     df = pd.read_csv(fl)  # Read uploaded file directly
+        # else:
+        #     url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
+
+        #     df = pd.read_csv(url)
         
         # Assuming the columns exist in the loaded DataFrame
         df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
