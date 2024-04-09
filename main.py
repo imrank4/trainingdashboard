@@ -92,7 +92,7 @@ def search_and_filter_data(df):
             fig.update_layout(xaxis_title="", yaxis_title="")
 
             # Display the bar chart
-            st.subheader("Training Status by Dealer code")
+            st.subheader("Current Training Status")
             st.plotly_chart(fig, use_container_width=True)
 
         except ValueError as e:
