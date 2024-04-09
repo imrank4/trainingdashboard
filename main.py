@@ -2,27 +2,30 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
+import requests
+from io import StringIO
+import streamlit as st
 
 st.set_page_config(page_title='Training dashboard',
                        page_icon='car',
                         layout='wide',initial_sidebar_state='expanded')
 
-def load_data():
+def load_data(fl):
     try:
         if fl is not None:
-        filename = fl.name
-        st.write(filename)
-        df = pd.read_csv(fl)
-    else:
-        url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
-        response = requests.get(url)
-        
-        if response.status_code == 200:
-            content = response.content.decode('utf-8')
-            df = pd.read_csv(StringIO(content))
+            filename = fl.name
+            st.write(filename)
+            df = pd.read_csv(fl)
         else:
-            st.error(f"Failed to fetch data from {url}. Error code: {response.status_code}")
-        
+            url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
+            response = requests.get(url)
+              
+            if response.status_code == 200:
+                content = response.content.decode('utf-8')
+                df = pd.read_csv(StringIO(content))
+            else:
+                st.error(f"Failed to fetch data from {url}. Error code: {response.status_code}")
+
         # Assuming the columns exist in the loaded DataFrame
         df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER CODE", "DSIRE STATUS", "DSIRE TARGET", "FULL NAME", "JOB TITLE", "TRAINING STATUS", "WBT", "ASSESSMENT", "NUMBERS"]]
         
@@ -32,6 +35,10 @@ def load_data():
     except Exception as e:
         st.error(f"Error loading data: {e}")
         return None
+
+# Example usage:
+# loaded_data = load_data(fl)
+
 
 def search_and_filter_data(df):
     st.markdown('<style>div.block-container{padding-top:1rem;}<style>', unsafe_allow_html=True)
