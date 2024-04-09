@@ -83,7 +83,7 @@ def search_and_filter_data(df):
 
             # Create bar chart showing the count of training statuses per dealer zone
             fig = px.bar(training_count_df, x="DSIRE STATUS", y="COUNT", color="DSIRE TARGET",
-                         title="Training Status by Zone", barmode="group", text="COUNT", facet_row="DEALER CODE", facet_row_spacing=0.5)
+                         title="Current Training Status", barmode="group", text="COUNT", facet_row="DEALER CODE", facet_row_spacing=0.5)
 
             # Add value labels on top of the bars
             fig.update_traces(textposition='auto')
@@ -92,7 +92,7 @@ def search_and_filter_data(df):
             fig.update_layout(xaxis_title="", yaxis_title="")
 
             # Display the bar chart
-            st.subheader("Current Training Status")
+            st.subheader("Training Status by Dealer Code")
             st.plotly_chart(fig, use_container_width=True)
 
         except ValueError as e:
