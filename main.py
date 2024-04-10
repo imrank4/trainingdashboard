@@ -31,7 +31,7 @@ def load_data():
             df = pd.read_csv(fl)  # Read uploaded file directly
         else:  # If no file uploaded, load data from a URL
             url = 'https://raw.githubusercontent.com/imrank4/trainingdashboard/main/py.csv'
-            st.write("No file uploaded. Loading data from URL...")
+      
             df = pd.read_csv(url)
       # if fl is not None:
         #     filename = fl.name
