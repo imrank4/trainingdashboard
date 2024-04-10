@@ -35,7 +35,7 @@ def load_data():
         #     df = pd.read_csv(url)
         
         # Assuming the columns exist in the loaded DataFrame
-        df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER NAME","DEALER CODE","USER ID",  "FULL NAME", "JOB TITLE", "TRAINING STATUS","ELIGLIBLITY","DSIRE STATUS", "DSIRE TARGET", "WBT", "ASSESSMENT", "JOINING DATE","R-AGING"]]
+        df = df.loc[:, ["DEALER ZONE", "DEALER GROUP", "DEALER NAME","DEALER CODE","USER ID",  "FULL NAME", "JOB TITLE",, "JOINING DATE" "DSIRE STATUS", "WBT", "ASSESSMENT","R-AGING", "DSIRE TARGET"]]
         
         # You may also use slicing method for this 
         # df = df.iloc[0:20, 2:8]
