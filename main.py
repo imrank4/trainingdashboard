@@ -15,9 +15,9 @@ def load_data():
         upload_option = st.sidebar.selectbox("Upload file : Optional", ["Yes", "No"])
 
         if upload_option == "Yes":
-            uploaded_file = st.sidebar.file_uploader("Upload file Optional:")
+            fl = st.sidebar.file_uploader("Upload file Optional:")
 
-        if uploaded_file is not None:
+        if fl is not None:
             # Process the uploaded file
             st.write("File uploaded successfully!")
         else:
