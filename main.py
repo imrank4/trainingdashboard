@@ -11,10 +11,18 @@ def load_data():
         st.header('D-SIRE TRAINING JOURNEY   : 🏆')
 
         st.image("Dsire.jpg")
-        #col1,col2 =st.columns(2)
-        #with col2:
-        with st.sidebar:
-            fl = st.file_uploader(":file_folder: Upload file: csv, xlsx, xls", type=(["csv", "xls", "xlsx"]))
+    #this is for uploading the file 
+        upload_option = st.sidebar.selectbox("Upload file : Optional", ["Yes", "No"])
+
+        if upload_option == "Yes":
+            uploaded_file = st.sidebar.file_uploader("Upload file Optional:")
+
+        if uploaded_file is not None:
+            # Process the uploaded file
+            st.write("File uploaded successfully!")
+        else:
+            st.write("No file uploaded.")
+          
         #st.image("https://raw.githubusercontent.com/imrank4/trainingdashboard/main/Dsire.jpg")
         if fl is not None:  # If file uploaded
             filename = fl.name
