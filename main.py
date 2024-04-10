@@ -12,7 +12,7 @@ def load_data():
 
         st.image("Dsire.jpg")
     #this is for uploading the file 
-        upload_option = st.sidebar.selectbox("Upload file : Optional", ["Yes", "No"])
+        upload_option = st.sidebar.selectbox("Upload file : Optional", ["Yes", "No"], index=1)
 
         if upload_option == "Yes":
             fl = st.sidebar.file_uploader("Upload file Optional:")
